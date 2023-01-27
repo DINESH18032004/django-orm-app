@@ -5,60 +5,56 @@ To develop a Django application to store and retrieve data from a database using
 
 ## Entity Relationship Diagram
 
-Include your ER diagram here
+![Entity Diagram](entity.png)
 
 ## DESIGN STEPS
 
 ### STEP 1:
-Then clone it. Create myapp
+An Django application is created inside dataproject folder.
 
 ### STEP 2:
-Then run the webserver,create the super user,after that create the 10 employee id
-### STEP 3: 
+A python program is written to create a table to store and retrieve data.
 
-Then add the screenshot of employee id in output
+### STEP 3:
+The table is created with 6 fields in which the username field is made as PrimaryKey.
 
-Write your own steps
+### STEP 4:
+Then the project files migrated. A superuser is also created.
+
+### STEP 5:
+Now the server side program is executed .
+
+### STEP 6:
+The admin page of our website is accessed using username and password.
+
+### STEP 7:
+Records are added and saved in the table inside the database.
+
+
 
 ## PROGRAM
 
-#setting.py
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-#models.py
-
+```
 from django.db import models
 from django.contrib import admin
-# Create your models here.
-class employee (models.Model):
-    EMP_ID=models.CharField(primary_key=True,max_length=20,help_text="EMP_ID")
-    ENAME=models.CharField(max_length=100)
-    POST=models.CharField(max_length=20)
-    SALARY=models.IntegerField()
 
-class employeeAdmin(admin.ModelAdmin):
-    list_display=('EMP_ID','ENAME','POST','SALARY')
+class GitDatabase(models.Model):
+    username_primary_key = models.CharField(max_length=30, help_text="User name must be unique", primary_key=True,unique=True)
+    password = models.CharField(max_length=30)
+    firstname = models.CharField(max_length=20)
+    lastname = models.CharField(max_length=20)
+    profile_photo = models.ImageField()
+    email = models.EmailField(max_length=50,unique=True)
 
-admin.py
-from django.contrib import admin
-from .models import employee,employeeAdmin
-# Register your models here.
-admin.site.register(employee,employeeAdmin)
+class GitAdmin(admin.ModelAdmin):
+    list_display = ('username_primary_key', 'password', 'firstname', 'lastname','profile_photo','email')
+
+```
 
 ## OUTPUT
 
-## Employee id
+![Django-data-base](django-data-base.png)
 
-![Employee_id](./img/10empid.png)
-
-## primary key
-
-![Employee_id](./img/primarykey.png)
 
 ## RESULT
-Django application to store and retrieve data from a database using Object Relational Mapping(ORM) is developed
+Thus a Django application is successfully developed to store and retrieve data from a database using Object Relational Mapping(ORM).
